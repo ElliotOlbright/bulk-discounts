@@ -7,16 +7,17 @@
       <th  colspan="4" style="font-family: Quicksand;">All of <%= @merchant.name %>'s Discounts</th>
     </tr>
   </thead >
-  <tbody id="top-customers">
-    <tr id="customer-table-headers">
+  <tbody id="discounts">
+    <tr id="discount-table-headers">
       <th>Number</th>
       <th>Name</th>
       <th>Quantity Needed</th>
       <th>Discount Percentage</th>
     </tr>
     <% @discounts.each_with_index do |d, idx| %>
-      <tr id="customer-<%= d.id %>">
+      <tr id="discount-<%= d.id %>">
         <td><%= "#{idx + 1}" %></td>
+        <td><%= link_to "#{d.name}", merchant_discount_path(@merchant.id, d.id), method: :get %></td>
         <td><%= "#{d.name}" %></td>
         <td><%= "#{d.quantity}" %></td>
         <td><%= "#{d.discount * 100}%" %></td>
