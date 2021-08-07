@@ -20,4 +20,11 @@ RSpec.describe 'Merchant Invoice New Page' do
     expect(current_path).to eq(merchant_discounts_path(@merchant.id))
     expect(page).to have_content('Flash Sale')
   end 
+
+  it 'can tell user to fill in all fields' do 
+    click_on 'Create Discount'
+
+    expect(current_path).to eq(new_merchant_discount_path(@merchant.id))
+    expect(page).to have_content('All fields are required.')
+  end 
 end
