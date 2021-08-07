@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :items
       resources :invoices
       resources :dashboard, only: [:index]
+      resources :discounts
   end
 
   namespace :admin do

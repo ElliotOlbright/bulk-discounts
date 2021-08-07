@@ -1,0 +1,30 @@
+<h1><%= @merchant.name %>'s Discounts</h1>
+
+<div text-align="center" align="center">
+  <%= link_to 'Create A New Discount', new_merchant_discount_path(@merchant.id), method: :get, class:"btn btn-outline-dark navbar-custom" %>
+</div>
+<table class="table table-striped">
+  <table class="table table-striped navbar-custom">
+  <thead class="custom" text-align="center" align="center">
+    <tr>
+      <th  colspan="4" style="font-family: Quicksand;">All of <%= @merchant.name %>'s Discounts</th>
+    </tr>
+  </thead >
+  <tbody id="discounts">
+    <tr id="discount-table-headers">
+      <th>Number</th>
+      <th>Name</th>
+      <th>Quantity Needed</th>
+      <th>Discount Percentage</th>
+    </tr>
+    <% @discounts.each_with_index do |d, idx| %>
+      <tr id="discount-<%= d.id %>">
+        <td><%= "#{idx + 1}" %></td>
+        <td><%= link_to "#{d.name}", merchant_discount_path(@merchant.id, d.id), method: :get, class:"btn btn-outline-dark btn-sm navbar-custom" %></td>
+        <td><%= "#{d.quantity}" %></td>
+        <td><%= "#{d.discount * 100}%" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
