@@ -1,6 +1,6 @@
 <h1>Hey <%= @merchant.name %>! Let's Make A New Discount</h1>
 
-<%= form_with url: merchant_discounts_path(@merchant.id), method: :post, local: true do |f| %>
+<%= form_with url: merchant_discounts_path(@merchant.id), method: :post, local: true, :html => { :class => 'card navbar-custom card-body', :style => 'width: 18rem;' } do |f| %>
 
   <%= f.label :name %>
   <%= f.text_field :name %><br>
