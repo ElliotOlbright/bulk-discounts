@@ -5,6 +5,7 @@ class Merchant < ApplicationRecord
   validates :status, presence: true
 
   has_many :items
+  has_many :discounts
 
 
   def self.top_merchants_by_revenue
