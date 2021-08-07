@@ -1,0 +1,16 @@
+<h1>Hey <%= @merchant.name %>! Let's Make A New Discount</h1>
+
+<%= form_with url: new_merchant_discount_path(@merchant.id), local: true do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :discount %>
+  <%= f.text_field :discount %><br>
+
+  <%= f.label :quantity %>
+  <%= f.text_field :quantity %><br>
+
+  <%= f.submit 'Create Discount' %>
+
+<% end %>
