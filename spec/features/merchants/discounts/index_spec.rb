@@ -16,10 +16,23 @@ RSpec.describe 'Merchant Discount Index Page' do
     expect(current_path).to eq(merchant_discounts_path(@merchant1.id))
   end
 
-  it 'can dsiplay all merchants discounts' do 
+  it 'can dsiplay all merchants discounts names' do 
     expect(page).to have_content(@discount1.name)
     expect(page).to have_content(@discount2.name)
     expect(page).to have_content(@discount3.name)
     expect(page).to have_content(@discount4.name)
+  end
+
+  it 'can dsiplay all merchants discounts discount' do 
+    expect(page).to have_content(@discount1.discount * 100)
+    expect(page).to have_content(@discount2.discount * 100)
+    expect(page).to have_content(@discount3.discount * 100)
+    expect(page).to have_content(@discount4.discount * 100)
+  end
+  it 'can dsiplay all merchants discounts quantity' do 
+    expect(page).to have_content(@discount1.quantity)
+    expect(page).to have_content(@discount2.quantity)
+    expect(page).to have_content(@discount3.quantity)
+    expect(page).to have_content(@discount4.quantity)
   end
 end 
