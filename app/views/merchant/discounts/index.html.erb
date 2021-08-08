@@ -20,9 +20,9 @@
     <% @discounts.each_with_index do |d, idx| %>
       <tr id="discount-<%= d.id %>">
         <td><%= "#{idx + 1}" %></td>
-        <td><%= link_to "#{d.name}", merchant_discount_path(@merchant.id, d.id), method: :get, class:"btn btn-outline-dark btn-sm navbar-custom" %></td>
+        <td><%= link_to "#{d.name}", merchant_discount_path(@merchant.id, d.id), method: :get, class:"btn btn-outline-dark btn-sm navbar-custom" %><%= link_to 'Delete', merchant_discount_path(@merchant.id, d.id), method: :delete, class:"btn btn-outline-dark btn-sm navbar-custom"  %></td>
         <td><%= "#{d.quantity}" %></td>
-        <td><%= "#{d.discount * 100}%" %></td>
+        <td><%= "#{d.discount}%" %></td>
       </tr>
     <% end %>
   </tbody>

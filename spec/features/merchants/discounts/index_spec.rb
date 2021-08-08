@@ -24,10 +24,10 @@ RSpec.describe 'Merchant Discount Index Page' do
   end
 
   it 'can dsiplay all merchants discounts discount' do 
-    expect(page).to have_content(@discount1.discount * 100)
-    expect(page).to have_content(@discount2.discount * 100)
-    expect(page).to have_content(@discount3.discount * 100)
-    expect(page).to have_content(@discount4.discount * 100)
+    expect(page).to have_content(@discount1.discount)
+    expect(page).to have_content(@discount2.discount)
+    expect(page).to have_content(@discount3.discount)
+    expect(page).to have_content(@discount4.discount)
   end
   it 'can dsiplay all merchants discounts quantity' do 
     expect(page).to have_content(@discount1.quantity)
@@ -42,5 +42,15 @@ RSpec.describe 'Merchant Discount Index Page' do
 
       expect(current_path).to eq(merchant_discount_path(@merchant1.id, @discount1.id))
     end 
+  end
+
+  it 'can delete a discount' do
+    within("#discount-#{@discount1.id}") do
+      expect(page).to have_content(@discount1.name)
+      click_on "Delete"
+
+      expect(current_path).to eq(merchant_discounts_path(@merchant1.id))
+    end 
+    expect(page).to have_content("#{@discount1.name} Successfully Deleted")
   end
 end 
