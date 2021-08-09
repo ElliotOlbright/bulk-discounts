@@ -4,8 +4,8 @@ class Merchant::DiscountsController < ApplicationController
   before_action :find_merchant, only: [:index, :show, :edit, :new, :create, :update]
 
   def index 
-    @dates = NagerService.create_holidays
     @discounts = @merchant.discounts
+    @dates = NagerService.create_holidays
   end 
 
   def show
