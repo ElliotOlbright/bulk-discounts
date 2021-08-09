@@ -50,5 +50,9 @@ class API
     end
   end
 
+  def self.holiday_dates
+    APIS::Holiday.new('https://date.nager.at/api/v3/NextPublicHolidays/US')
+  end 
+
 
 end
