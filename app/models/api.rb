@@ -49,10 +49,4 @@ class API
       APIS::Pulls.new(render_request(contributions[:pulls])).total_count_by_author
     end
   end
-
-  def self.holiday_dates
-    APIS::Holiday.new('https://date.nager.at/api/v3/NextPublicHolidays/US')
-  end 
-
-
-end
+end 

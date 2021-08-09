@@ -31,11 +31,10 @@ class Merchant::DiscountsController < ApplicationController
   end
 
   def update 
-    require "pry"; binding.pry
     merchant = Merchant.find(params[:merchant_id])
     discount = Discount.find(params[:id]) 
-    discount.update(discount_params)
-    if discount.save
+    require "pry"; binding.pry
+    if discount.update(discount_model_params)
       flash[:alert] = "Successfully Updated #{discount.name}"
       redirect_to merchant_discount_path(merchant.id, discount.id)
     else 

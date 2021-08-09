@@ -27,5 +27,6 @@ RSpec.describe 'Merchant Discount Edit Page' do
     click_on 'Submit'
 
     expect(current_path).to eq(merchant_discount_path(@merchant1.id, @discount1.id))
+    expect(page).to have_content('Super Sale!')
   end
 end
