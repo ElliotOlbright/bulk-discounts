@@ -109,4 +109,8 @@ RSpec.describe API do
     expect(API.aggregate_by_author(:commits)).to eq({})
   end
 
+  it 'can return holidays hash' do 
+    
+  end
+
 end

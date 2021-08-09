@@ -49,6 +49,4 @@ class API
       APIS::Pulls.new(render_request(contributions[:pulls])).total_count_by_author
     end
   end
-
-
-end
+end 

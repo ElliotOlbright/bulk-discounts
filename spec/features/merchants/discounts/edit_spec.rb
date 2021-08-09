@@ -27,5 +27,16 @@ RSpec.describe 'Merchant Discount Edit Page' do
     click_on 'Submit'
 
     expect(current_path).to eq(merchant_discount_path(@merchant1.id, @discount1.id))
+    expect(page).to have_content('Super Sale!')
+  end
+
+  it 'can error when fields arent filled out' do
+    fill_in('Name', with: '')
+    fill_in('Discount', with: 0.75)
+    fill_in('Quantity', with: 10)
+    click_on 'Submit'
+
+    expect(current_path).to eq(edit_merchant_discount_path(@merchant1.id, @discount1.id))
+    expect(page).to have_content('All fields are required.')
   end
 end

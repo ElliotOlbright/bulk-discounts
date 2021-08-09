@@ -14,6 +14,7 @@
  *= require_self
  */
  @import url('https://fonts.googleapis.com/css?family=Parisienne|Quicksand&display=swap');
+
  html, body {
 	background-image: image-url('/assets/wordpressrippp.jpg'); 
 	height: 100%;
@@ -35,10 +36,13 @@
 	background-color: #ffffff75;
 }
 
-.custom {
+.custom2 {
 	background-color: #ffffffa1;
 }
 
+.custom {
+	background-color: #7c1212a1;
+}
 .customblack {
 	background-color: #000000a1;
 }
