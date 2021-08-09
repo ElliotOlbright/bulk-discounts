@@ -25,6 +25,25 @@ class Merchant::DiscountsController < ApplicationController
     end
   end
 
+  def edit 
+    @merchant = Merchant.find(params[:merchant_id])
+    @discount = Discount.find(params[:id])
+  end
+
+  def update 
+    require "pry"; binding.pry
+    merchant = Merchant.find(params[:merchant_id])
+    discount = Discount.find(params[:id]) 
+    discount.update(discount_params)
+    if discount.save
+      flash[:alert] = "Successfully Updated #{discount.name}"
+      redirect_to merchant_discount_path(merchant.id, discount.id)
+    else 
+      flash[:alert] = "All fields are required."
+      redirect_to edit_merchant_discount_path(merchant.id, discount.id)
+    end
+  end
+
   def destroy 
     @discount =  Discount.find(params[:id]) 
     @discount.destroy
@@ -36,5 +55,9 @@ class Merchant::DiscountsController < ApplicationController
 
   def discount_params
     params.permit(:name, :quantity, :discount, :merchant_id)
+  end
+
+  def discount_model_params 
+    params.require(:discount).permit(:name, :quantity, :discount)
   end
 end

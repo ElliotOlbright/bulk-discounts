@@ -1,7 +1,7 @@
 <h1><%= @discount.name %> Show Page</h1>
 
 <div text-align="center" align="center">
-  <%= link_to 'Edit This Discount', new_merchant_discount_path(@merchant.id), method: :get, class:"btn btn-outline-dark navbar-custom" %>
+  <%= link_to 'Edit This Discount', edit_merchant_discount_path(@merchant.id,@discount.id), method: :get, class:"btn btn-outline-dark navbar-custom" %>
 </div>
 <table class="table table-striped">
   <table class="table table-striped navbar-custom">

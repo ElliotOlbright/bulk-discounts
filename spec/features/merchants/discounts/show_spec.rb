@@ -18,4 +18,10 @@ RSpec.describe 'Merchant Discount show Page' do
     expect(page).to have_content(@discount1.discount)
     expect(page).to have_content(@discount1.quantity)
   end
+
+  it 'can take the user to edit the discount' do 
+    click_on 'Edit This Discount'
+
+    expect(current_path).to eq(edit_merchant_discount_path(@merchant1.id,@discount1.id))
+  end
 end 
