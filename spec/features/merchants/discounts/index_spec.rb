@@ -24,10 +24,10 @@ RSpec.describe 'Merchant Discount Index Page' do
   end
 
   it 'can dsiplay all merchants discounts discount' do 
-    expect(page).to have_content(@discount1.discount)
-    expect(page).to have_content(@discount2.discount)
-    expect(page).to have_content(@discount3.discount)
-    expect(page).to have_content(@discount4.discount)
+    expect(page).to have_content(@discount1.discount * 100)
+    expect(page).to have_content(@discount2.discount * 100)
+    expect(page).to have_content(@discount3.discount * 100)
+    expect(page).to have_content(@discount4.discount * 100)
   end
   it 'can dsiplay all merchants discounts quantity' do 
     expect(page).to have_content(@discount1.quantity)
