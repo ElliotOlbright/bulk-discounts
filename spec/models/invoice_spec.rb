@@ -57,6 +57,7 @@ RSpec.describe Invoice do
         quantity: 1,
         unit_price: 25_000,
         status: 1)
+
       @invoice_item3 = InvoiceItem.create!(
         item: @item3,
         invoice: @invoice2,
@@ -76,6 +77,71 @@ RSpec.describe Invoice do
         expect(@invoice1.invoice_revenue).to eq(26_500)
       end
     end
-  end
 
+    describe '#after_discount' do 
+      it 'returns the total revenue after discount' do 
+        @merchant1 = Merchant.create!(name: 'Korbanth')
+
+        @item1 = @merchant1.items.create!(
+          name: 'SK2',
+          description: "Starkiller's lightsaber from TFU2 promo trailer",
+          unit_price: 100)
+
+        @customer1 = Customer.create!(
+          first_name: 'Ben',
+          last_name: 'Franklin')
+
+        @invoice1 = @customer1.invoices.create!(status: 1)
+
+        @invoice_item1 = InvoiceItem.create!(
+          item: @item1,
+          invoice: @invoice1,
+          quantity: 10,
+          unit_price: 10_000,
+          status: 0)
+
+        @discount_1 = Discount.create!(name: '20% Off', quantity: 10, discount: 0.2, merchant_id: @merchant1.id)
+
+        expect(@invoice1.after_discount).to eq(800.0)
+      end 
+
+      it 'returns the total revenue after discount(multiple discounts)' do 
+        @merchant1 = Merchant.create!(name: 'Korbanth')
+
+        @item1 = @merchant1.items.create!(
+          name: 'SK2',
+          description: "Starkiller's lightsaber from TFU2 promo trailer",
+          unit_price: 100)
+
+        @item2 = @merchant1.items.create!(
+          name: 'johnny',
+          description: "Starkiller's lightsaber from TFU2 promo trailer",
+          unit_price: 100)
+
+        @customer1 = Customer.create!(
+          first_name: 'Ben',
+          last_name: 'Franklin')
+
+        @invoice1 = @customer1.invoices.create!(status: 1)
+
+        @invoice_item1 = InvoiceItem.create!(
+          item: @item1,
+          invoice: @invoice1,
+          quantity: 10,
+          unit_price: 10_000,
+          status: 0)
+
+          @invoice_item2 = InvoiceItem.create!(
+            item: @item1,
+            invoice: @invoice1,
+            quantity: 10,
+            unit_price: 10_000,
+            status: 0)
+
+        @discount_1 = Discount.create!(name: '20% Off', quantity: 10, discount: 0.2, merchant_id: @merchant1.id)
+
+        expect(@invoice1.after_discount).to eq(1600.0)
+      end
+    end 
+  end
 end

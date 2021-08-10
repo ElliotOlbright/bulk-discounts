@@ -10,7 +10,25 @@ class InvoiceItem < ApplicationRecord
   has_many :merchants, through: :item
   has_many :discounts, through: :merchants
 
-  def create_discount 
+  def best_discount
+    discounts.where('? >= discounts.quantity', self.quantity)
+    .order(discount: :desc)
+    .first
+  end
 
+  def invoice_item_total
+    (unit_price * quantity)/100.00
+  end
+
+  def discount_revenue
+    if !best_discount.blank?
+      (invoice_item_total * (1 - (best_discount.discount)))
+    else
+      invoice_item_total
+    end
   end
 end
+
+
+# discounts.quantity >= invoice_item.quantity
+

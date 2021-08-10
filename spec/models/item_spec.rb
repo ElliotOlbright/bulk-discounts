@@ -136,6 +136,5 @@ RSpec.describe Item do
         expect(@merchant_1.items.order_by_name(:name)).to eq([@item_2, @item_3, @item_1])
       end
     end
-
   end
 end
