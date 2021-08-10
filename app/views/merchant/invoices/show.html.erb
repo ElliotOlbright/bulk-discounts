@@ -34,6 +34,11 @@
         <%= form.select :status, options_for_select([:pending, :packaged, :shipped], ii.status) %>
         <%= form.submit "Update Item Status" %>
       <% end %>
+      <% if !ii.discount_id.nil? %>
+        <%= link_to 'Discount', merchant_discount_path(@merchant.id, ii.discount_id), method: :get, class:"btn btn-outline-dark navbar-custom"  %>
+      <% else %>
+        <h6>No Applicable Discount</h6>
+      <% end %>
     </div>
   </div>
   <br/>

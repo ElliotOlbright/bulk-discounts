@@ -7,13 +7,18 @@ class InvoiceItem < ApplicationRecord
 
   belongs_to :invoice
   belongs_to :item
+  belongs_to :discount, optional: true
   has_many :merchants, through: :item
   has_many :discounts, through: :merchants
 
   def best_discount
-    discounts.where('? >= discounts.quantity', self.quantity)
+    discount = discounts.where('? >= discounts.quantity', self.quantity)
     .order(discount: :desc)
     .first
+    
+    self.update(discount_id: discount.id) if discount
+
+    discount
   end
 
   def invoice_item_total
