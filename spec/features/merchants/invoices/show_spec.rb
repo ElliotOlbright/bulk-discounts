@@ -109,4 +109,33 @@ RSpec.describe "The Merchant Invoice show page" do
   it 'displays the total revenue generated from all the items on this invoice' do
     expect(page).to have_content("Total Invoice Revenue Potential: $265.00")
   end
+
+  it 'displays the total revenue after discounts have been applied' do 
+    merchant3 = Merchant.create!(name: 'Korbanth')
+
+    item3 = merchant3.items.create!(
+      name: 'SK2',
+      description: "Starkiller's lightsaber from TFU2 promo trailer",
+      unit_price: 100)
+
+    customer3 = Customer.create!(
+      first_name: 'Ben',
+      last_name: 'Franklin')
+
+    invoice3 = customer3.invoices.create!(status: 1)
+
+    invoice_item3 = InvoiceItem.create!(
+      item: item3,
+      invoice: invoice3,
+      quantity: 10,
+      unit_price: 10_000,
+      status: 0)
+
+    discount_3 = Discount.create!(name: '20% Off', quantity: 10, discount: 0.2, merchant_id: merchant3.id)
+
+    visit merchant_invoice_path(merchant3.id, invoice3.id)
+    
+
+    expect(page).to have_content("Total Invoice Revenue Potential After Discount: $800.00")
+  end
 end
