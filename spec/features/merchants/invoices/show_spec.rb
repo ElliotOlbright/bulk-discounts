@@ -138,4 +138,34 @@ RSpec.describe "The Merchant Invoice show page" do
 
     expect(page).to have_content("Total Invoice Revenue Potential After Discount: $800.00")
   end
+
+  it 'can take user to discount show page' do 
+    merchant3 = Merchant.create!(name: 'Korbanth')
+
+    item3 = merchant3.items.create!(
+      name: 'SK2',
+      description: "Starkiller's lightsaber from TFU2 promo trailer",
+      unit_price: 100)
+
+    customer3 = Customer.create!(
+      first_name: 'Ben',
+      last_name: 'Franklin')
+
+    invoice3 = customer3.invoices.create!(status: 1)
+
+    invoice_item3 = InvoiceItem.create!(
+      item: item3,
+      invoice: invoice3,
+      quantity: 10,
+      unit_price: 10_000,
+      status: 0)
+
+    discount_3 = Discount.create!(name: '20% Off', quantity: 10, discount: 0.2, merchant_id: merchant3.id)
+
+    visit merchant_invoice_path(merchant3.id, invoice3.id)
+    
+    click_on 'Discount'
+
+    expect(current_path).to eq(merchant_discount_path(merchant3.id, discount_3.id))
+  end 
 end
