@@ -58,6 +58,7 @@ RSpec.describe 'Admin Invoice Show Page' do
       unit_price: 60_000,
       status: 1)
 
+
     visit "/admin/invoices/#{@invoice1.id}"
   end
 
@@ -76,8 +77,36 @@ RSpec.describe 'Admin Invoice Show Page' do
   it 'displays the total revenue generated from all the items on this invoice' do
     expect(page).to have_content("Total Invoice Revenue Potential")
     expect(page).to have_content("$865.00")
-
   end
+
+  it 'can display the total revenue generated after dicounts have been applied' do 
+    merchant3 = Merchant.create!(name: 'Korbanth')
+
+    item3 = merchant3.items.create!(
+      name: 'SK2',
+      description: "Starkiller's lightsaber from TFU2 promo trailer",
+      unit_price: 100)
+
+    customer3 = Customer.create!(
+      first_name: 'Ben',
+      last_name: 'Franklin')
+
+    invoice3 = customer3.invoices.create!(status: 1)
+
+    invoice_item3 = InvoiceItem.create!(
+      item: item3,
+      invoice: invoice3,
+      quantity: 10,
+      unit_price: 10_000,
+      status: 0)
+
+    discount_3 = Discount.create!(name: '20% Off', quantity: 10, discount: 0.2, merchant_id: merchant3.id)
+
+    visit "/admin/invoices/#{invoice3.id}"
+
+    expect(page).to have_content('Total Invoice Revenue Potential After Discounts')
+    expect(page).to have_content("$800.00")
+  end 
 
   it 'can update invoice status: happy path' do
     expect(page).to have_field(:status)
