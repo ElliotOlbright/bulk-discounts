@@ -15,7 +15,7 @@ RSpec.describe 'Merchant Discount show Page' do
 
   it 'can display the discount attibutes' do 
     expect(page).to have_content(@discount1.name)
-    expect(page).to have_content(@discount1.discount)
+    expect(page).to have_content(@discount1.discount * 100)
     expect(page).to have_content(@discount1.quantity)
   end
 
