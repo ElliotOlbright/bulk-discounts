@@ -61,9 +61,7 @@ RSpec.describe InvoiceItem do
       end 
 
       it ' can return total if no discount it applied' do 
-
         expect(@ii2.discount_revenue).to eq(5.0)
-
       end 
     end
   end 

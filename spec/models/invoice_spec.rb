@@ -131,12 +131,12 @@ RSpec.describe Invoice do
           unit_price: 10_000,
           status: 0)
 
-          @invoice_item2 = InvoiceItem.create!(
-            item: @item1,
-            invoice: @invoice1,
-            quantity: 10,
-            unit_price: 10_000,
-            status: 0)
+        @invoice_item2 = InvoiceItem.create!(
+          item: @item1,
+          invoice: @invoice1,
+          quantity: 10,
+          unit_price: 10_000,
+          status: 0)
 
         @discount_1 = Discount.create!(name: '20% Off', quantity: 10, discount: 0.2, merchant_id: @merchant1.id)
 
